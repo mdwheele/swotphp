@@ -10,5 +10,7 @@
     "autoload": {
         "psr-4": {"SwotPHP\\": "src/"}
     },
-    "require": {}
+    "require": {
+        "jeremykendall/php-domain-parser": "~1.3"
+    }
 }
