@@ -22,9 +22,11 @@ I will be pulling changes to upstream domain data.
 
 Install through Composer.
 
+```json
 "require": {
     "mdwheele/swotphp": "dev-master"
 }
+```
 
 ### Usage
 
