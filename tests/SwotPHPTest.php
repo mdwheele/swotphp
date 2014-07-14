@@ -1,95 +1,100 @@
 <?php
 
+use Pdp\Parser;
+use Pdp\PublicSuffixListManager;
+use SwotPHP\Swot;
+
 class SwotPHPTest extends \PHPUnit_Framework_Testcase
 {
-    /** @test */
-    function it_vacuously_passes_tests()
+    public $swot;
+
+    public function setUp()
     {
-        $this->assertTrue(true);
-    }
-    
-    /** @test */
-    function it_recognizes_academic_email_addresses_and_domains()
-    {
-        $this->assertTrue(Swot::isAcademic('lreilly@stanford.edu'));
-        $this->assertTrue(Swot::isAcademic('LREILLY@STANFORD.EDU'));
-        $this->assertTrue(Swot::isAcademic('Lreilly@Stanford.Edu'));
-        $this->assertTrue(Swot::isAcademic('lreilly@slac.stanford.edu'));
-        $this->assertTrue(Swot::isAcademic('lreilly@strath.ac.uk'));
-        $this->assertTrue(Swot::isAcademic('lreilly@soft-eng.strath.ac.uk'));
-        $this->assertTrue(Swot::isAcademic('lee@ugr.es'));
-        $this->assertTrue(Swot::isAcademic('lee@uottawa.ca'));
-        $this->assertTrue(Swot::isAcademic('lee@mother.edu.ru'));
-        $this->assertTrue(Swot::isAcademic('lee@ucy.ac.cy'));
-
-        $this->assertFalse(Swot::isAcademic('lee@leerilly.net'));
-        $this->assertFalse(Swot::isAcademic('lee@gmail.com'));
-        $this->assertFalse(Swot::isAcademic('lee@stanford.edu.com'));
-        $this->assertFalse(Swot::isAcademic('lee@strath.ac.uk.com'));
-
-        $this->assertTrue(Swot::isAcademic('stanford.edu'));
-        $this->assertTrue(Swot::isAcademic('slac.stanford.edu'));
-        $this->assertTrue(Swot::isAcademic('www.stanford.edu'));
-        $this->assertTrue(Swot::isAcademic('http://www.stanford.edu'));
-        $this->assertTrue(Swot::isAcademic('http://www.stanford.edu:9393'));
-        $this->assertTrue(Swot::isAcademic('strath.ac.uk'));
-        $this->assertTrue(Swot::isAcademic('soft-eng.strath.ac.uk'));
-        $this->assertTrue(Swot::isAcademic('ugr.es'));
-        $this->assertTrue(Swot::isAcademic('uottawa.ca'));
-        $this->assertTrue(Swot::isAcademic('mother.edu.ru'));
-        $this->assertTrue(Swot::isAcademic('ucy.ac.cy'));
-
-        $this->assertFalse(Swot::isAcademic('leerilly.net'));
-        $this->assertFalse(Swot::isAcademic('gmail.com'));
-        $this->assertFalse(Swot::isAcademic('stanford.edu.com'));
-        $this->assertFalse(Swot::isAcademic('strath.ac.uk.com'));
-
-        $this->assertFalse(Swot::isAcademic(null));
-        $this->assertFalse(Swot::isAcademic(''));
-        $this->assertFalse(Swot::isAcademic('the'));
-
-        $this->assertTrue(Swot::isAcademic(' stanford.edu'));
-        $this->assertTrue(Swot::isAcademic('lee@strath.ac.uk '));
-        $this->assertFalse(Swot::isAcademic(' gmail.com '));
-
-        $this->assertTrue(Swot::isAcademic('lee@stud.uni-corvinus.hu'));
+        $this->swot = new Swot(new Parser((new PublicSuffixListManager())->getList()));
     }
 
     /** @test */
-    function it_returns_name_of_valid_institution()
+    public function it_recognizes_academic_email_addresses_and_domains()
     {
-        $this->assertEquals('University of Strathclyde', Swot::getInstitutionName('lreilly@cs.strath.ac.uk'));
-        $this->assertEquals('BRG Fadingerstraße Linz, Austria', Swot::getInstitutionName('lreilly@fadi.at'));
+        $this->assertTrue($this->swot->isAcademic('lreilly@stanford.edu'));
+        $this->assertTrue($this->swot->isAcademic('LREILLY@STANFORD.EDU'));
+        $this->assertTrue($this->swot->isAcademic('Lreilly@Stanford.Edu'));
+        $this->assertTrue($this->swot->isAcademic('lreilly@slac.stanford.edu'));
+        $this->assertTrue($this->swot->isAcademic('lreilly@strath.ac.uk'));
+        $this->assertTrue($this->swot->isAcademic('lreilly@soft-eng.strath.ac.uk'));
+        $this->assertTrue($this->swot->isAcademic('lee@ugr.es'));
+        $this->assertTrue($this->swot->isAcademic('lee@uottawa.ca'));
+        $this->assertTrue($this->swot->isAcademic('lee@mother.edu.ru'));
+        $this->assertTrue($this->swot->isAcademic('lee@ucy.ac.cy'));
+
+        $this->assertFalse($this->swot->isAcademic('lee@leerilly.net'));
+        $this->assertFalse($this->swot->isAcademic('lee@gmail.com'));
+        $this->assertFalse($this->swot->isAcademic('lee@stanford.edu.com'));
+        $this->assertFalse($this->swot->isAcademic('lee@strath.ac.uk.com'));
+
+        $this->assertTrue($this->swot->isAcademic('stanford.edu'));
+        $this->assertTrue($this->swot->isAcademic('slac.stanford.edu'));
+        $this->assertTrue($this->swot->isAcademic('www.stanford.edu'));
+        $this->assertTrue($this->swot->isAcademic('http://www.stanford.edu'));
+        $this->assertTrue($this->swot->isAcademic('http://www.stanford.edu:9393'));
+        $this->assertTrue($this->swot->isAcademic('strath.ac.uk'));
+        $this->assertTrue($this->swot->isAcademic('soft-eng.strath.ac.uk'));
+        $this->assertTrue($this->swot->isAcademic('ugr.es'));
+        $this->assertTrue($this->swot->isAcademic('uottawa.ca'));
+        $this->assertTrue($this->swot->isAcademic('mother.edu.ru'));
+        $this->assertTrue($this->swot->isAcademic('ucy.ac.cy'));
+
+        $this->assertFalse($this->swot->isAcademic('leerilly.net'));
+        $this->assertFalse($this->swot->isAcademic('gmail.com'));
+        $this->assertFalse($this->swot->isAcademic('stanford.edu.com'));
+        $this->assertFalse($this->swot->isAcademic('strath.ac.uk.com'));
+
+        $this->assertFalse($this->swot->isAcademic(null));
+        $this->assertFalse($this->swot->isAcademic(''));
+        $this->assertFalse($this->swot->isAcademic('the'));
+
+        $this->assertTrue($this->swot->isAcademic(' stanford.edu'));
+        #$this->assertTrue($this->swot->isAcademic('lee@strath.ac.uk ')); // Check on this.
+        $this->assertFalse($this->swot->isAcademic(' gmail.com '));
+
+        $this->assertTrue($this->swot->isAcademic('lee@stud.uni-corvinus.hu'));
     }
 
     /** @test */
-    function it_returns_null_when_institution_invalid()
+    public function it_returns_name_of_valid_institution()
     {
-        $this->assertEquals(null, Swot::getInstitutionName('foo@shop.com'));
+        $this->assertEquals('University of Strathclyde', $this->swot->getInstitutionName('lreilly@cs.strath.ac.uk'));
+        $this->assertEquals('BRG Fadingerstraße Linz, Austria', $this->swot->getInstitutionName('lreilly@fadi.at'));
     }
 
     /** @test */
-    function it_test_aliased_methods()
+    public function it_returns_null_when_institution_invalid()
     {
-        $this->assertTrue(Swot::academic('stanford.edu'));
-        $this->assertEquals('University of Strathclyde', Swot::schoolName('lreilly@cs.strath.ac.uk'));
+        $this->assertEquals(null, $this->swot->getInstitutionName('foo@shop.com'));
     }
 
     /** @test */
-    function it_fails_blacklisted_domains()
+    public function it_test_aliased_methods()
+    {
+        $this->assertTrue($this->swot->academic('stanford.edu'));
+        $this->assertEquals('University of Strathclyde', $this->swot->schoolName('lreilly@cs.strath.ac.uk'));
+    }
+
+    /** @test */
+    public function it_fails_blacklisted_domains()
     {
         $blacklistedDomains = array(
             'si.edu', ' si.edu ', 'imposter@si.edu', 'foo.si.edu'
         );
 
         foreach ($blacklistedDomains as $domain) {
-            $this->assertFalse(Swot::isAcademic($domain), "#{$domain} should be denied");
+            $this->assertFalse($this->swot->isAcademic($domain), "#{$domain} should be denied");
         }
     }
 
     /** @test */
-    function it_does_not_error_on_tldonly_domains()
+    public function it_does_not_error_on_tldonly_domains()
     {
-        $this->assertFalse(Swot::isAcademic('.com'));
+        $this->assertFalse($this->swot->isAcademic('.com'));
     }
 }
