@@ -3,6 +3,7 @@
 use Pdp\Parser;
 use Pdp\PublicSuffixListManager;
 use SwotPHP\Swot;
+use SwotPHP\Facades\Native\Swot as SwotFacade;
 
 class SwotPHPTest extends \PHPUnit_Framework_Testcase
 {
@@ -12,6 +13,13 @@ class SwotPHPTest extends \PHPUnit_Framework_Testcase
     {
         $list = new PublicSuffixListManager();
         $this->swot = new Swot(new Parser($list->getList()));
+    }
+
+    /** @test */
+    function it_can_use_native_facade_accessor()
+    {
+        $this->assertTrue(SwotFacade::isAcademic('lreilly@stanford.edu'));
+        $this->assertEquals('University of Strathclyde', SwotFacade::getInstitutionName('lreilly@cs.strath.ac.uk'));
     }
 
     /** @test */

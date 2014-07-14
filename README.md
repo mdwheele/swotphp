@@ -32,6 +32,22 @@ Install through Composer.
 
 ### Usage
 
+The easiest way to get started with SwotPHP is to use a facade to access functionality.  However, the base
+implementation is present as a plain ol' PHP object in case developers want control over the construction themselves.
+The implementation has an injected dependency on [PHP Domain Parser](https://github.com/jeremykendall/php-domain-parser),
+an implementation of a URL parser backed by the [Public Suffix List](http://publicsuffix.org).
+
+Framework-specific facades / service providers may be added later.  The native facade is a good example of how
+the object should be instantiated.
+
+**Native**
+
+```php
+require_once('vendor/autoload.php');
+
+use SwotPHP\Facades\Native\Swot;
+```
+
 #### Verify Email Addresses
 
 ```php
