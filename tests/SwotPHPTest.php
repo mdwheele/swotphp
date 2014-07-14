@@ -10,7 +10,8 @@ class SwotPHPTest extends \PHPUnit_Framework_Testcase
 
     public function setUp()
     {
-        $this->swot = new Swot(new Parser((new PublicSuffixListManager())->getList()));
+        $list = new PublicSuffixListManager();
+        $this->swot = new Swot(new Parser($list->getList()));
     }
 
     /** @test */
