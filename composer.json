@@ -1,0 +1,14 @@
+{
+    "name": "mdwheele/swotphp",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dustin Wheeler",
+            "email": "mdwheele@ncsu.edu"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"SwotPHP\\": "src/"}
+    },
+    "require": {}
+}
