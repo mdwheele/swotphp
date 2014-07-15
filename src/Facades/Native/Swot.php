@@ -4,13 +4,13 @@ use Pdp\Parser;
 use Pdp\PublicSuffixListManager;
 use SwotPHP\Swot as SwotImpl;
 
-class Swot {
+class Swot
+{
     protected static $instance;
 
     public static function instance()
     {
-        if (static::$instance === null)
-        {
+        if (static::$instance === null) {
             $list = new PublicSuffixListManager();
             static::$instance = new SwotImpl(new Parser($list->getList()));
         }

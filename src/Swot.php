@@ -1,4 +1,4 @@
-<?php namespace SwotPHP; 
+<?php namespace SwotPHP;
 
 use Pdp\Parser;
 
@@ -15,8 +15,8 @@ class Swot
      * Determines whether or not an email address or domain is
      * part of a higher-education institution.
      *
-     * @param string $text Email address or domain name
-     * @return bool true if academic, false otherwise
+     * @param  string $text Email address or domain name
+     * @return bool   true if academic, false otherwise
      */
     public function isAcademic($text)
     {
@@ -30,7 +30,7 @@ class Swot
             return false;
         }
 
-        foreach($this->getBlacklistedTopLevelDomains() as $blacklistedDomain) {
+        foreach ($this->getBlacklistedTopLevelDomains() as $blacklistedDomain) {
             $name = (string) $domain['host'];
 
             if (preg_match('/' . preg_quote($blacklistedDomain) . '$/', $name)) {
@@ -52,8 +52,8 @@ class Swot
     /**
      * Alias for isAcademic(text)
      *
-     * @param string $text Email address or domain name
-     * @return bool true if academic, false otherwise
+     * @param  string $text Email address or domain name
+     * @return bool   true if academic, false otherwise
      */
     public function academic($text)
     {
@@ -64,7 +64,7 @@ class Swot
      * Retrieves domain information including top-level domain (tld),
      * second-level domain (sld), and host information.
      *
-     * @param string $text Email address or domain name
+     * @param  string     $text Email address or domain name
      * @return array|null array of domain information if found, null if error.
      */
     private function getDomain($text)
@@ -89,7 +89,7 @@ class Swot
     /**
      * Retrieves the institution name matching a domain or email address.
      *
-     * @param string $text Email address or domain name
+     * @param  string      $text Email address or domain name
      * @return string|null Name of institution if found, null if error.
      */
     public function getInstitutionName($text)
@@ -100,7 +100,7 @@ class Swot
     /**
      * Alias for getInstitutionName()
      *
-     * @param string $text Email address or domain name
+     * @param  string      $text Email address or domain name
      * @return string|null Name of institution if found, null if error.
      */
     public function schoolName($text)
@@ -111,7 +111,7 @@ class Swot
     /**
      * Retrieves the institution name matching a domain.
      *
-     * @param array $domain
+     * @param  array       $domain
      * @return string|null Name of institution if found, null if file doesn't exist.
      */
     private function nameFromAcademicDomain($domain)
@@ -128,7 +128,7 @@ class Swot
     /**
      * Constructs the path to a domain definition.
      *
-     * @param array $domain
+     * @param  array  $domain
      * @return string path to domain definition.
      */
     private function getPath($domain)
@@ -139,8 +139,8 @@ class Swot
     /**
      * Helper to determine if a file exists for an academic domain.
      *
-     * @param array $domain
-     * @return bool true if a file exists for the domain, false otherwise.
+     * @param  array $domain
+     * @return bool  true if a file exists for the domain, false otherwise.
      */
     private function matchesAcademicDomain($domain)
     {
