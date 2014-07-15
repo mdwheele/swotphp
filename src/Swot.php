@@ -12,9 +12,11 @@ class Swot
     }
 
     /**
-     * @param $text
-     * @return bool
-     * @api
+     * Determines whether or not an email address or domain is
+     * part of a higher-education institution.
+     *
+     * @param string $text Email address or domain name
+     * @return bool true if academic, false otherwise
      */
     public function isAcademic($text)
     {
@@ -28,7 +30,7 @@ class Swot
             return false;
         }
 
-        foreach($this->getBlacklist() as $blacklistedDomain) {
+        foreach($this->getBlacklistedTopLevelDomains() as $blacklistedDomain) {
             $name = (string) $domain['host'];
 
             if (preg_match('/' . preg_quote($blacklistedDomain) . '$/', $name)) {
@@ -48,53 +50,24 @@ class Swot
     }
 
     /**
-     * Alias for Swot::isAcademic(text)
+     * Alias for isAcademic(text)
      *
-     * @param $text
-     *
-     * @return bool
-     * @api
+     * @param string $text Email address or domain name
+     * @return bool true if academic, false otherwise
      */
     public function academic($text)
     {
         return $this->isAcademic($text);
     }
 
-    public function getInstitutionName($text)
-    {
-        return $this->nameFromAcademicDomain($this->getDomain($text));
-    }
-
     /**
-     * Alias for Swot::getInstitutionName(text)
+     * Retrieves domain information including top-level domain (tld),
+     * second-level domain (sld), and host information.
      *
-     * @param $text
-     *
-     * @return null|string
+     * @param string $text Email address or domain name
+     * @return array|null array of domain information if found, null if error.
      */
-    public function schoolName($text)
-    {
-        return $this->getInstitutionName($text);
-    }
-
-    /**
-     * @param $domain
-     * @return null|string
-     * @api
-     */
-    public function nameFromAcademicDomain($domain)
-    {
-        $path = $this->getPath($domain);
-        // Figure out the institutions' name based on the domain name.
-        // Return institution name, null if not found.
-        if ( ! file_exists($path)) {
-            return null;
-        }
-
-        return trim(file_get_contents($path));
-    }
-
-    public function getDomain($text)
+    private function getDomain($text)
     {
         try {
             $domain = array();
@@ -113,15 +86,64 @@ class Swot
         }
     }
 
-    public function getPath($domain)
+    /**
+     * Retrieves the institution name matching a domain or email address.
+     *
+     * @param string $text Email address or domain name
+     * @return string|null Name of institution if found, null if error.
+     */
+    public function getInstitutionName($text)
+    {
+        return $this->nameFromAcademicDomain($this->getDomain($text));
+    }
+
+    /**
+     * Alias for getInstitutionName()
+     *
+     * @param string $text Email address or domain name
+     * @return string|null Name of institution if found, null if error.
+     */
+    public function schoolName($text)
+    {
+        return $this->getInstitutionName($text);
+    }
+
+    /**
+     * Retrieves the institution name matching a domain.
+     *
+     * @param array $domain
+     * @return string|null Name of institution if found, null if file doesn't exist.
+     */
+    private function nameFromAcademicDomain($domain)
+    {
+        $path = $this->getPath($domain);
+
+        if ( ! file_exists($path)) {
+            return null;
+        }
+
+        return trim(file_get_contents($path));
+    }
+
+    /**
+     * Constructs the path to a domain definition.
+     *
+     * @param array $domain
+     * @return string path to domain definition.
+     */
+    private function getPath($domain)
     {
         return dirname(__DIR__) . '/domains/' . $domain['tld'] . '/' . $domain['sld'];
     }
 
+    /**
+     * Helper to determine if a file exists for an academic domain.
+     *
+     * @param array $domain
+     * @return bool true if a file exists for the domain, false otherwise.
+     */
     private function matchesAcademicDomain($domain)
     {
-        // Check if file exists for academic domain
-        // Calls getPath
         if (empty($domain['tld']) or empty($domain['sld'])) {
             return false;
         }
@@ -129,11 +151,17 @@ class Swot
         return file_exists($this->getPath($domain));
     }
 
-    private function getBlacklist()
+    /**
+     * @return array list of blacklisted top-level domains
+     */
+    private function getBlacklistedTopLevelDomains()
     {
         return array('si.edu');
     }
-    
+
+    /**
+     * @return array list of valid top-level domains
+     */
     private function getAcademicTopLevelDomains()
     {
         return array(
@@ -301,6 +329,4 @@ class Swot
             'vic.edu.au'
         );
     }
-
-
 }
