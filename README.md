@@ -1,6 +1,6 @@
 # Swot PHP :apple:
 
-[![Latest Stable Version](https://poser.pugx.org/mdwheele/swotphp/v/stable.svg)](https://packagist.org/packages/mdwheele/swotphp) [![Total Downloads](https://poser.pugx.org/mdwheele/swotphp/downloads.svg)](https://packagist.org/packages/mdwheele/swotphp) [![License](https://poser.pugx.org/mdwheele/swotphp/license.svg)](https://packagist.org/packages/mdwheele/swotphp)
+[![Build Status](https://travis-ci.org/mdwheele/swotphp.svg?branch=master)](https://travis-ci.org/mdwheele/swotphp) [![Latest Stable Version](https://poser.pugx.org/mdwheele/swotphp/v/stable.svg)](https://packagist.org/packages/mdwheele/swotphp) [![Total Downloads](https://poser.pugx.org/mdwheele/swotphp/downloads.svg)](https://packagist.org/packages/mdwheele/swotphp) [![License](https://poser.pugx.org/mdwheele/swotphp/license.svg)](https://packagist.org/packages/mdwheele/swotphp)
 
 This is a port of the popular Ruby Gem, "Swot".  As such, please do NOT make data contributions to this repository.
 Contribute any new academic domain names to the Ruby version of this package at https://github.com/leereilly/swot.
