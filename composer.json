@@ -1,5 +1,9 @@
 {
     "name": "mdwheele/swotphp",
+    "description": "Identify email addresses or domains names that belong to colleges or universities.",
+    "keywords": ["url"],
+    "homepage": "https://github.com/mdwheele/swotphp",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
