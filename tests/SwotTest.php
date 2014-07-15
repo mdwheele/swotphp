@@ -63,7 +63,7 @@ class SwotPHPTest extends \PHPUnit_Framework_Testcase
         $this->assertFalse($this->swot->isAcademic('the'));
 
         $this->assertTrue($this->swot->isAcademic(' stanford.edu'));
-        #$this->assertTrue($this->swot->isAcademic('lee@strath.ac.uk ')); // Check on this.
+        $this->assertTrue($this->swot->isAcademic('lee@strath.ac.uk '));
         $this->assertFalse($this->swot->isAcademic(' gmail.com '));
 
         $this->assertTrue($this->swot->isAcademic('lee@stud.uni-corvinus.hu'));

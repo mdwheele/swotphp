@@ -98,7 +98,7 @@ class Swot
     {
         try {
             $domain = array();
-            $url = $this->parser->parseUrl($text);
+            $url = $this->parser->parseUrl(trim($text));
 
             $domain['tld'] = $url->host->publicSuffix;
 
