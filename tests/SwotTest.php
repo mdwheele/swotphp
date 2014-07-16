@@ -93,7 +93,7 @@ class SwotPHPTest extends \PHPUnit_Framework_Testcase
     public function it_fails_blacklisted_domains()
     {
         $blacklistedDomains = array(
-            'si.edu', ' si.edu ', 'imposter@si.edu', 'foo.si.edu'
+            'si.edu', ' si.edu ', 'imposter@si.edu', 'foo.si.edu', 'america.edu'
         );
 
         foreach ($blacklistedDomains as $domain) {

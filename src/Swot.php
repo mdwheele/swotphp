@@ -156,7 +156,7 @@ class Swot
      */
     private function getBlacklistedTopLevelDomains()
     {
-        return array('si.edu');
+        return array('si.edu', 'america.edu');
     }
 
     /**
