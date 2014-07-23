@@ -75,3 +75,10 @@ Swot::isAcademic('http://www.rangers.co.uk') # false
 Swot::schoolName('lreilly@cs.strath.ac.uk') -> "University of Strathclyde"
 Swot::schoolName('http://www.stanford.edu') -> "Stanford University"
 ```
+
+### Known Issues
+
+- Lack of automated data import from Ruby gem's domain list.
+- There are architectural issues with the package resultant from differences in PHP and Ruby-isms. When I get time, there are two areas I'd like to focus on:
+    1. Consolidate some of how the internal API flows while maintaining public interface.
+    2. Implement a different mode of accessing the public suffix registry.  Currently, the package is possibly abusing an excellent [URL parser](https://github.com/jeremykendall/php-domain-parser) and I'd like to investigate the possibility of a separate component dedicated to modeling the Public Suffix registries ruleset and algorithms.
