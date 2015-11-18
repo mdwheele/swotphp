@@ -74,11 +74,10 @@ class Swot
             $url = $this->parser->parseUrl(trim($text));
 
             $domain['tld'] = $url->host->publicSuffix;
-
             $registerableDomainParts = explode('.', $url->host->registerableDomain);
             $domain['sld'] = $registerableDomainParts[0];
-
             $domain['host'] = $url->host;
+            $domain['path'] = implode('/', array_reverse($registerableDomainParts)) . '.txt';
 
             return $domain;
         } catch (\Exception $e) {
@@ -133,7 +132,7 @@ class Swot
      */
     private function getPath($domain)
     {
-        return dirname(__DIR__) . '/domains/' . $domain['tld'] . '/' . $domain['sld'];
+        return dirname(__DIR__) . '/domains/' . $domain['path'];
     }
 
     /**
