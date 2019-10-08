@@ -2,3 +2,4 @@
 upstream/
 vendor/
 node_modules/
+.phpunit.result.cache
