@@ -4,24 +4,26 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c4748271703fc8ee772a2bd7786ce60c",
+    "content-hash": "eaf977918eeff00281e90bb58feac676",
     "packages": [
         {
             "name": "jeremykendall/php-domain-parser",
-            "version": "1.4.2",
+            "version": "1.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jeremykendall/php-domain-parser.git",
-                "reference": "add2b07755ab1d2543a383bd78fbe031c6377f9a"
+                "reference": "66379578432e85f764f4f9d587d61e48d66c2082"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jeremykendall/php-domain-parser/zipball/add2b07755ab1d2543a383bd78fbe031c6377f9a",
-                "reference": "add2b07755ab1d2543a383bd78fbe031c6377f9a",
+                "url": "https://api.github.com/repos/jeremykendall/php-domain-parser/zipball/66379578432e85f764f4f9d587d61e48d66c2082",
+                "reference": "66379578432e85f764f4f9d587d61e48d66c2082",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
+                "ext-intl": "*",
+                "ext-mbstring": "*",
                 "php": ">=5.3.0"
             },
             "require-dev": {
@@ -58,7 +60,7 @@
                 "domain parsing",
                 "url parsing"
             ],
-            "time": "2014-07-21T15:23:19+00:00"
+            "time": "2014-07-28T18:36:24+00:00"
         }
     ],
     "packages-dev": [
@@ -1586,7 +1588,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.0"
+        "php": ">=7.2"
     },
     "platform-dev": []
 }
