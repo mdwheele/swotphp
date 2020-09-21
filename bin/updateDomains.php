@@ -5,11 +5,11 @@ chdir(dirname(__FILE__)  . DIRECTORY_SEPARATOR);
 require '../vendor/autoload.php';
 
 $upstream_dir = '..' . DIRECTORY_SEPARATOR . 'upstream';
-$archive_zip = 'leereilly_archive.zip';
-$archive_dir = 'leereilly_archive';
+$archive_zip = 'JetBrains_swot_archive.zip';
+$archive_dir = 'JetBrains_swot_archive';
 $domains_dir = '..' . DIRECTORY_SEPARATOR . 'domains';
 
-// Create upstream dir to hold leereilly/swot files
+// Create upstream dir to hold JetBrains/swot files
 if (! is_dir($upstream_dir)) {
     echo 'Creating upstream directory' . PHP_EOL;
     mkdir($upstream_dir);
@@ -21,7 +21,7 @@ $archive_dir = $upstream_dir . $archive_dir;
 
 if (! file_exists($upstream_dir . $archive_zip) || time()-filemtime($upstream_dir . $archive_zip) > 43200) {
     echo 'Downloading fresh Ruby Swot archive' . PHP_EOL;
-    file_put_contents($upstream_dir . $archive_zip, fopen('https://github.com/leereilly/swot/archive/master.zip', 'r'));
+    file_put_contents($upstream_dir . $archive_zip, fopen('https://github.com/JetBrains/swot/archive/master.zip', 'r'));
     echo 'Download complete' . PHP_EOL;
 }
 
