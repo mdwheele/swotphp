@@ -1,7 +1,6 @@
 <?php
 
-use Pdp\Parser;
-use Pdp\PublicSuffixListManager;
+use Pdp\Rules;
 use PHPUnit\Framework\TestCase;
 use SwotPHP\Facades\Native\Swot as SwotFacade;
 use SwotPHP\Swot;
@@ -12,8 +11,7 @@ class SwotPHPTest extends TestCase
 
     protected function setUp(): void
     {
-        $list = new PublicSuffixListManager();
-        $this->swot = new Swot(new Parser($list->getList()));
+        $this->swot = new Swot(Rules::createFromPath(dirname(__DIR__) . '/public/public_suffix_list.dat'));
     }
 
     /** @test */

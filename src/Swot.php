@@ -1,14 +1,14 @@
 <?php namespace SwotPHP;
 
-use Pdp\Parser;
+use Pdp\Rules;
 
 class Swot
 {
-    private $parser;
+    private $rules;
 
-    public function __construct(Parser $parser)
+    public function __construct(Rules $rules)
     {
-        $this->parser = $parser;
+        $this->rules = $rules;
     }
 
     /**
@@ -71,18 +71,35 @@ class Swot
     {
         try {
             $domain = array();
-            $url = $this->parser->parseUrl(trim($text));
+            $pdpDomain = $this->rules->resolve($this->parseHost($text))->toAscii();
 
-            $domain['tld'] = $url->host->publicSuffix;
-            $registerableDomainParts = explode('.', $url->host->registerableDomain);
+            $domain['tld'] = $pdpDomain->getPublicSuffix();
+            $registerableDomainParts = explode('.', $pdpDomain->getRegistrableDomain());
             $domain['sld'] = $registerableDomainParts[0];
-            $domain['host'] = $url->host;
+            $domain['host'] = $pdpDomain->getContent();
             $domain['path'] = implode('/', array_reverse($registerableDomainParts)) . '.txt';
 
             return $domain;
         } catch (\Exception $e) {
             return null;
         }
+    }
+
+    /**
+     * Retrieves hostname from URI or email address
+     *
+     * @param string $text Email address or domain name
+     *
+     * @return string hostname
+     */
+    private function parseHost($text)
+    {
+        $text = trim($text);
+        if (strpos($text, '://') === false) {
+            $text = 'http://' . $text;
+        }
+
+        return (string)parse_url($text, PHP_URL_HOST);
     }
 
     /**
