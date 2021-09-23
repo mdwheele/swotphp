@@ -1,0 +1,16 @@
+{
+  "name": "commitlint",
+  "version": "1.0.0",
+  "description": "Conventional Commits",
+  "main": "index.js",
+  "scripts": {
+    "start": "commitlint -g commitlint.config.js -e"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "commitlint-plugin-function-rules": "^1.1.20"
+  }
+}

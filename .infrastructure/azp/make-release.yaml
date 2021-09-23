@@ -1,0 +1,31 @@
+pr: none
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+resources:
+  repositories:
+    - repository: ops-macpaw-io
+      type: github
+      name: MacPaw/ops-macpaw-io
+      ref: refs/heads/master
+      endpoint: MacPaw
+variables:
+  - name: project
+    value: macpaw
+  - group: github
+
+stages:
+  - stage: main
+    pool:
+      name: default-ops
+    displayName: Run semantic release
+    jobs:
+      - job: run_changelog_generator
+        displayName: Run changelog generator
+        steps:
+          - template: azp/templates/semantic-release.yaml@ops-macpaw-io
+            parameters:
+              githubToken: $(github_token)
+              containerRegistry: gcr
