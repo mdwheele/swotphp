@@ -16,9 +16,9 @@
     },
     "require": {
         "php": ">=7.2.5",
-        "jeremykendall/php-domain-parser": "~5.7"
+        "jeremykendall/php-domain-parser": "~6.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.4"
+        "phpunit/phpunit": "^9.0"
     }
 }

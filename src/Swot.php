@@ -73,10 +73,10 @@ class Swot
             $domain = array();
             $pdpDomain = $this->rules->resolve($this->parseHost($text))->toAscii();
 
-            $domain['tld'] = $pdpDomain->getPublicSuffix();
-            $registerableDomainParts = explode('.', $pdpDomain->getRegistrableDomain());
+            $domain['tld'] = $pdpDomain->suffix()->value();
+            $registerableDomainParts = explode('.', $pdpDomain->registrableDomain()->value() ?? '');
             $domain['sld'] = $registerableDomainParts[0];
-            $domain['host'] = $pdpDomain->getContent();
+            $domain['host'] = $pdpDomain->domain()->value();
             $domain['path'] = implode('/', array_reverse($registerableDomainParts)) . '.txt';
 
             return $domain;

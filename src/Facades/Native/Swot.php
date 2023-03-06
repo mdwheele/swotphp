@@ -11,7 +11,7 @@ class Swot
     {
         if (static::$instance === null) {
             $publicSuffixListPath = dirname(__DIR__, 3) . '/public/public_suffix_list.dat';
-            static::$instance = new SwotImpl(DomainParserRules::createFromPath($publicSuffixListPath));
+            static::$instance = new SwotImpl(DomainParserRules::fromPath($publicSuffixListPath));
         }
 
         return static::$instance;

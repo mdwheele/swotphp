@@ -11,7 +11,7 @@ class SwotPHPTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->swot = new Swot(Rules::createFromPath(dirname(__DIR__) . '/public/public_suffix_list.dat'));
+        $this->swot = new Swot(Rules::fromPath(dirname(__DIR__) . '/public/public_suffix_list.dat'));
     }
 
     /** @test */
