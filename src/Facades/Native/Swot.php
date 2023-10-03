@@ -1,7 +1,6 @@
 <?php namespace SwotPHP\Facades\Native;
 
-use Pdp\Parser;
-use Pdp\PublicSuffixListManager;
+use Pdp\Rules as DomainParserRules;
 use SwotPHP\Swot as SwotImpl;
 
 class Swot
@@ -11,8 +10,8 @@ class Swot
     public static function instance()
     {
         if (static::$instance === null) {
-            $list = new PublicSuffixListManager();
-            static::$instance = new SwotImpl(new Parser($list->getList()));
+            $publicSuffixListPath = dirname(__DIR__, 3) . '/public/public_suffix_list.dat';
+            static::$instance = new SwotImpl(DomainParserRules::fromPath($publicSuffixListPath));
         }
 
         return static::$instance;
@@ -42,5 +41,4 @@ class Swot
                 return call_user_func_array(array($instance, $method), $args);
         }
     }
-
 }

@@ -15,10 +15,10 @@
         "psr-4": {"SwotPHP\\": "src/"}
     },
     "require": {
-        "php": ">=7.2",
-        "jeremykendall/php-domain-parser": "~1.4"
+        "php": ">=7.4",
+        "jeremykendall/php-domain-parser": "^6.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.4"
+        "phpunit/phpunit": "^9.0"
     }
 }
